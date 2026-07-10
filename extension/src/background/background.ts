@@ -1,0 +1,1 @@
+console.log("DevPlus background worker started.");

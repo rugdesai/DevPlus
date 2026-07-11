@@ -4,7 +4,9 @@
 
 ---
 
-DevPlus is an AI-powered GitHub analytics platform that transforms GitHub activity into meaningful developer insights. Using repository data and AI, it generates a custom developer score, highlights strengths, and suggests areas for improvement—all directly from a Chrome Extension.
+**DevPlus** is an AI-powered GitHub analytics platform that transforms GitHub activity into meaningful developer insights. Using repository data and AI, it generates a custom developer score, highlights strengths, and suggests areas for improvement—all directly from a Chrome Extension.
+
+Think of it as **Spotify Wrapped + Grammarly** for GitHub Developers!
 
 ---
 

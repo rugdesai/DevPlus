@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
-import { 
-    getGithubUser,
-    getGithubRepos 
-} from "../services/github.service";
-import { analyzeRepositories } from "../services/analytics.service";
-import { calculateDevScore } from "../services/scoring.service";
+
+import { analyzeDeveloper } from "../services/developer.service";
+
+
 
 export const analyzeUser = async (
     req: Request,
@@ -15,48 +13,32 @@ export const analyzeUser = async (
 
         const username = req.params.username as string;
 
-
-        const user = await getGithubUser(username);
-        const repos = await getGithubRepos(username);
-        const analytics = analyzeRepositories(repos);
-        const devPlusScore = calculateDevScore(analytics);
-
-        res.json({
-
-    username:user.login,
-
-    name:user.name,
-
-    score:devPlusScore,
-
-    analytics,
+        if (!username) {
+            return res.status(400).json({
+                message: "Username is required"
+            });
+        }
+        
+        const result = await analyzeDeveloper(username);
 
 
-    repositories:
-    repos.map((repo:any)=>({
-
-        name:repo.name,
-
-        language:repo.language,
-
-        stars:
-        repo.stargazers_count,
-
-        forks:
-        repo.forks_count
-
-    }))
-
-});
+        return res.json(result);
 
 
-    } catch (error) {
-
-        console.log(error);
-
-
-        res.status(500).json({
-            message: "Failed to analyze GitHub user"
+    } 
+    
+    catch (error: any) {
+    if (error.response?.status === 404) {
+        return res.status(404).json({
+            message: "GitHub user not found"
         });
     }
+
+    console.error(error);
+
+    return res.status(500).json({
+        message: "Internal server error"
+    });
+}
+
 };

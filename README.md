@@ -1,7 +1,7 @@
 # 🚀 DevPlus
 
 > AI-powered GitHub Developer Analytics Chrome Extension
-
+---
 DevPlus helps developers better understand their GitHub profile through analytics, a custom developer score, and AI-generated insights. It combines GitHub repository data with AI to provide meaningful feedback on coding habits, strengths, and areas for improvement.
 Think of it as **Spotify Wrapped + Grammarly** for GitHub Developers
 ---

@@ -13,6 +13,7 @@ export default defineManifest({
   host_permissions: [
     "https://github.com/*",
     "https://api.github.com/*",
+    "http://localhost:5050/*",
   ],
 
   action: {

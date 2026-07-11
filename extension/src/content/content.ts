@@ -1,5 +1,19 @@
-console.log("DevPlus content script loaded.");
+import { injectDevPlus, removeDevPlus } from "./inject";
+import { observeUrlChanges } from "./observer";
+import { isProfilePage } from "../utils/github";
 
-const path = window.location.pathname;
+function updateExtension() {
+  if (isProfilePage()) {
+    injectDevPlus();
+  } else {
+    removeDevPlus();
+  }
+}
 
-console.log("Current Path:", path);
+// Initial page
+updateExtension();
+
+// GitHub SPA navigation
+observeUrlChanges(() => {
+  updateExtension();
+});

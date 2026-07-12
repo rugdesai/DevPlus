@@ -27,7 +27,7 @@ export interface Analytics {
     totalRepositories: number;
     totalStars: number;
     totalForks: number;
-    languages: Record<string, number>;
+    topLanguages: string[];
 }
 
 export interface DeveloperAnalysis {

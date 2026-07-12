@@ -25,6 +25,8 @@ export default function DevPlusCard() {
 
                 const data = await getDeveloperAnalysis(username);
 
+                console.log("Developer Analysis:", data);
+
                 setAnalysis(data);
             } catch (err) {
                 console.error(err);
@@ -41,7 +43,7 @@ export default function DevPlusCard() {
     return (
         <Card>
             <div className="flex items-center justify-between">
-                <h2 className="text-lg font-bold">🚀 DevPlus</h2>
+                <h2 className="text-xl font-bold tracking-tight">🚀 DevPlus</h2>
                 <Badge>Beta</Badge>
             </div>
 
@@ -49,30 +51,68 @@ export default function DevPlusCard() {
                 Username: <strong>{username}</strong>
             </p>
 
-            {loading && <Loader />}
+            {loading && (
+              <div className="mt-4">
+                <Loader />
+                <p className="mt-2 text-sm text-gray-500">
+                  Analyzing developer profile...
+                </p>
+              </div>
+            )}
 
             {error && (
-                <p className="mt-3 text-red-500">
+                <p className="mt-4 rounded-md border border-red-300 bg-red-50 p-3 text-red-700 text-sm">
                     {error}
                 </p>
             )}
 
             {analysis && (
-                <div className="mt-4 space-y-2">
-                    <p>
-                        <strong>Name:</strong> {analysis.name}
-                    </p>
+                <div className="mt-4 space-y-3">
+                    <div className="border-t pt-3">
+                        <p>
+                            <span className="font-medium">👤 Name:</span>{" "}
+                            {analysis.name ?? "N/A"}
+                        </p>
 
-                    <p>
-                        <strong>Score:</strong> {analysis.score}
-                    </p>
+                        <p>
+                            <span className="font-medium">⭐ DevPlus Score:</span>{" "}
+                            {analysis.score}
+                        </p>
+                    </div>
 
-                    <p>
-                        <strong>Repositories:</strong>{" "}
-                        {analysis.repositories.length}
-                    </p>
+                    <div className="border-t pt-3 space-y-1">
+                        <p>
+                            📦 Repositories:{" "}
+                            {analysis.analytics.totalRepositories}
+                        </p>
+
+                        <p>
+                            ⭐ Total Stars:{" "}
+                            {analysis.analytics.totalStars.toLocaleString()}
+                        </p>
+
+                        <p>
+                            🍴 Total Forks:{" "}
+                            {analysis.analytics.totalForks.toLocaleString()}
+                        </p>
+
+                        <p>
+                            💻 Top Languages:
+                        </p>
+
+                        <div className="flex flex-wrap gap-2 mt-2">
+                            {analysis.analytics.topLanguages.map((language) => (
+                                <Badge key={language}>
+                                    {language}
+                                </Badge>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             )}
+            <div className="mt-6 border-t pt-3 text-center text-xs text-gray-500">
+                Powered by DevPlus AI
+            </div>
         </Card>
     );
 }

@@ -7,6 +7,7 @@ import Loader from "./Loader";
 import { useGithubProfile } from "../hooks/useGithubProfile";
 import { getDeveloperAnalysis } from "../services/api";
 import type { DeveloperAnalysis } from "../utils/github";
+import AIInsights from "./AIInsights";
 
 export default function DevPlusCard() {
     const { username } = useGithubProfile();
@@ -111,6 +112,11 @@ export default function DevPlusCard() {
     ))}
 </div>
                     </div>
+                    <AIInsights
+                        summary={analysis.insight.summary}
+                        strengths={analysis.insight.strengths}
+                        weaknesses={analysis.insight.weaknesses}
+                      />
                 </div>
             )}
             <div className="mt-6 border-t pt-3 text-center text-xs text-gray-500">

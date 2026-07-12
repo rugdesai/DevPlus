@@ -25,7 +25,7 @@ export default function DevPlusCard() {
 
                 const data = await getDeveloperAnalysis(username);
 
-                console.log("Developer Analysis:", data);
+                console.log(JSON.stringify(data, null, 2));
 
                 setAnalysis(data);
             } catch (err) {
@@ -71,42 +71,45 @@ export default function DevPlusCard() {
                     <div className="border-t pt-3">
                         <p>
                             <span className="font-medium">👤 Name:</span>{" "}
-                            {analysis.name ?? "N/A"}
+                            {analysis.githubUsername}
                         </p>
 
                         <p>
                             <span className="font-medium">⭐ DevPlus Score:</span>{" "}
-                            {analysis.score}
+                            {analysis.insight.score}
                         </p>
                     </div>
 
-                    <div className="border-t pt-3 space-y-1">
-                        <p>
-                            📦 Repositories:{" "}
-                            {analysis.analytics.totalRepositories}
-                        </p>
+                    <div className="border-t pt-3 space-y-2">
+    <p>
+        📦 Repositories: {analysis.repositories.length}
+    </p>
 
-                        <p>
-                            ⭐ Total Stars:{" "}
-                            {analysis.analytics.totalStars.toLocaleString()}
-                        </p>
+    <p>
+        ⭐ Total Stars:{" "}
+        {analysis.repositories
+            .reduce((sum, repo) => sum + repo.stars, 0)
+            .toLocaleString()}
+    </p>
 
-                        <p>
-                            🍴 Total Forks:{" "}
-                            {analysis.analytics.totalForks.toLocaleString()}
-                        </p>
+    <p>
+        🍴 Total Forks:{" "}
+        {analysis.repositories
+            .reduce((sum, repo) => sum + repo.forks, 0)
+            .toLocaleString()}
+    </p>
 
                         <p>
                             💻 Top Languages:
                         </p>
 
                         <div className="flex flex-wrap gap-2 mt-2">
-                            {analysis.analytics.topLanguages.map((language) => (
-                                <Badge key={language}>
-                                    {language}
-                                </Badge>
-                            ))}
-                        </div>
+    {[...new Set(analysis.repositories.map(repo => repo.language))].map((language: string) => (
+        <Badge key={language}>
+            {language}
+        </Badge>
+    ))}
+</div>
                     </div>
                 </div>
             )}

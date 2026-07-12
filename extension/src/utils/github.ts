@@ -16,12 +16,6 @@ const RESERVED_PATHS = [
   "collections",
 ];
 
-export interface Repository {
-    name: string;
-    language: string | null;
-    stars: number;
-    forks: number;
-}
 
 export interface Analytics {
     totalRepositories: number;
@@ -30,12 +24,34 @@ export interface Analytics {
     topLanguages: string[];
 }
 
-export interface DeveloperAnalysis {
-    username: string;
-    name: string | null;
+export interface Repository {
+    id: string;
+    name: string;
+    language: string;
+    stars: number;
+    forks: number;
+    userId: string;
+}
+
+export interface Insight {
+    id: string;
     score: number;
-    analytics: Analytics;
+    summary: string;
+    strengths: string[];
+    weaknesses: string[];
+    createdAt: string;
+    userId: string;
+}
+
+export interface DeveloperAnalysis {
+    id: string;
+    githubUsername: string;
+    avatarUrl: string;
+    createdAt: string;
+
     repositories: Repository[];
+
+    insight: Insight;
 }
 
 export function getUsername(): string | null {

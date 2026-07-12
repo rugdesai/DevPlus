@@ -30,7 +30,7 @@ export default function RepoStarsChart({
       </h3>
 
       <div className="h-72">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width={250} height={250}>
           <BarChart
             data={data}
             layout="vertical"

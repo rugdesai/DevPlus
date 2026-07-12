@@ -54,7 +54,7 @@ export default function LanguageChart({ repositories }: Props) {
 
       <div className="h-64">
 
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width={250} height={250}>
           <PieChart>
 
             <Pie
@@ -77,6 +77,7 @@ export default function LanguageChart({ repositories }: Props) {
 
           </PieChart>
         </ResponsiveContainer>
+        </div>
         <div className="mt-5 space-y-2">
   {data.map((item, index) => (
     <div
@@ -104,6 +105,6 @@ export default function LanguageChart({ repositories }: Props) {
   ))}
 </div>
       </div>
-    </div>
+    
   );
 }

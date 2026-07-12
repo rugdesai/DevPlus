@@ -32,7 +32,7 @@ export default function RepositoryComparisonChart({
         ⭐ Repository Popularity
       </h3>
 
-      <div className="h-72">
+      <div style={{ width: 250, height: 250 }}>
         <ResponsiveContainer width={250} height={250}>
           <BarChart
             data={data}

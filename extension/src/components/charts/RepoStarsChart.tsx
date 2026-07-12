@@ -23,13 +23,15 @@ export default function RepoStarsChart({
     .sort((a, b) => b.stars - a.stars)
     .slice(0, 5);
 
+    console.log("RepoStarsChart", data);
+
   return (
     <div className="mt-6">
       <h3 className="mb-3 font-semibold">
         ⭐ Top Starred Repositories
       </h3>
 
-      <div className="h-72">
+      <div style={{ width: 250, height: 250 }}>
         <ResponsiveContainer width={250} height={250}>
           <BarChart
             data={data}

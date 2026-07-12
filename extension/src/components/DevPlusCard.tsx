@@ -8,6 +8,9 @@ import { useGithubProfile } from "../hooks/useGithubProfile";
 import { getDeveloperAnalysis } from "../services/api";
 import type { DeveloperAnalysis } from "../utils/github";
 import AIInsights from "./AIInsights";
+import LanguageChart from "./charts/LanguageChart";
+import RepoStarsChart from "./charts/RepoStarsChart";
+import RepositoryComparisonChart from "./charts/RepositoryComparisonChart";
 
 export default function DevPlusCard() {
     const { username } = useGithubProfile();
@@ -81,37 +84,75 @@ export default function DevPlusCard() {
                         </p>
                     </div>
 
-                    <div className="border-t pt-3 space-y-2">
-    <p>
-        📦 Repositories: {analysis.repositories.length}
-    </p>
+<div className="border-t pt-4">
 
-    <p>
-        ⭐ Total Stars:{" "}
-        {analysis.repositories
-            .reduce((sum, repo) => sum + repo.stars, 0)
-            .toLocaleString()}
-    </p>
+    <div className="grid grid-cols-3 gap-3">
 
-    <p>
-        🍴 Total Forks:{" "}
-        {analysis.repositories
-            .reduce((sum, repo) => sum + repo.forks, 0)
-            .toLocaleString()}
-    </p>
+        <div className="rounded-xl border bg-gray-50 p-3 text-center">
+            <p className="text-2xl font-bold">
+                {analysis.repositories.length}
+            </p>
 
-                        <p>
-                            💻 Top Languages:
-                        </p>
+            <p className="mt-1 text-xs text-gray-500">
+                📦 Repositories
+            </p>
+        </div>
 
-                        <div className="flex flex-wrap gap-2 mt-2">
-    {[...new Set(analysis.repositories.map(repo => repo.language))].map((language: string) => (
-        <Badge key={language}>
-            {language}
-        </Badge>
-    ))}
+        <div className="rounded-xl border bg-gray-50 p-3 text-center">
+            <p className="text-2xl font-bold">
+                {analysis.repositories
+                    .reduce((sum, repo) => sum + repo.stars, 0)
+                    .toLocaleString()}
+            </p>
+
+            <p className="mt-1 text-xs text-gray-500">
+                ⭐ Stars
+            </p>
+        </div>
+
+        <div className="rounded-xl border bg-gray-50 p-3 text-center">
+            <p className="text-2xl font-bold">
+                {analysis.repositories
+                    .reduce((sum, repo) => sum + repo.forks, 0)
+                    .toLocaleString()}
+            </p>
+
+            <p className="mt-1 text-xs text-gray-500">
+                🍴 Forks
+            </p>
+        </div>
+
+    </div>
+
+    <div className="mt-5">
+        <p className="font-medium">
+            💻 Top Languages
+        </p>
+
+        <div className="mt-2 flex flex-wrap gap-2">
+            {[...new Set(analysis.repositories.map(repo => repo.language))].map(
+                (language: string) => (
+                    <Badge key={language}>
+                        {language}
+                    </Badge>
+                )
+            )}
+        </div>
+    </div>
+
 </div>
-                    </div>
+                    <LanguageChart
+                        repositories={analysis.repositories}
+                    />
+
+                    <RepoStarsChart
+                        repositories={analysis.repositories}
+                    />
+
+                    <RepositoryComparisonChart
+                        repositories={analysis.repositories}
+                    />
+
                     <AIInsights
                         summary={analysis.insight.summary}
                         strengths={analysis.insight.strengths}

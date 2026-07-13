@@ -30,6 +30,7 @@ const LANGUAGE_COLORS: Record<string, string> = {
 import Card from "./Card";
 import Badge from "./Badge";
 import Loader from "./Loader";
+import { formatNumber } from "../utils/formatNumber";
 
 import { useGithubProfile } from "../hooks/useGithubProfile";
 import { getDeveloperAnalysis } from "../services/api";
@@ -74,7 +75,9 @@ export default function DevPlusCard() {
     return (
         <Card>
             <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-sans font-bold tracking-tight text-amber-400">
+                    <h2   className="text-2xl font-bold tracking-tight"
+                          style={{ color: "#fbbf24" }}
+                    >
                         DevPlus
                     </h2>
                 <Badge>Beta</Badge>
@@ -130,46 +133,64 @@ export default function DevPlusCard() {
 
 <div className="border-t pt-4">
 
-    <div className="grid grid-cols-3 gap-3">
+<div className="border-t border-zinc-700 pt-4 space-y-4">
 
-        <div className="rounded-xl border bg-gray-50 p-3 text-center">
-            <p className="text-2xl font-bold">
-                {analysis.repositories.length}
-            </p>
-
-<div className="mt-1 flex items-center justify-center gap-1 text-xs text-zinc-400">
-  <RepoIcon size={14} />
-  <span className="font-medium">Repositories</span>
-</div>
-        </div>
-
-        <div className="rounded-xl border bg-gray-50 p-3 text-center">
-            <p className="text-2xl font-bold">
-                {analysis.repositories
-                    .reduce((sum, repo) => sum + repo.stars, 0)
-                    .toLocaleString()}
-            </p>
-
-<div className="mt-1 flex items-center justify-center gap-1 text-xs text-zinc-400">
-  <StarFillIcon size={14} className="text-yellow-400" />
-  <span className="font-medium">Stars</span>
-</div>
-        </div>
-
-        <div className="rounded-xl border bg-gray-50 p-3 text-center">
-            <p className="text-2xl font-bold">
-                {analysis.repositories
-                    .reduce((sum, repo) => sum + repo.forks, 0)
-                    .toLocaleString()}
-            </p>
-
-<div className="mt-1 flex items-center justify-center gap-1 text-xs text-zinc-400">
-  <RepoForkedIcon size={14} />
-  <span className="font-medium">Forks</span>
-</div>
-        </div>
-
+  <div className="flex items-center justify-between">
+    <div className="flex items-center gap-2">
+      <RepoIcon size={16} className="text-zinc-400" />
+      <span className="text-sm text-zinc-300">
+        Repositories
+      </span>
     </div>
+
+    <span className="font-semibold text-zinc-100">
+      {analysis.repositories.length}
+    </span>
+  </div>
+
+  <div className="flex items-center justify-between">
+    <div className="flex items-center gap-2">
+      <StarFillIcon
+        size={16}
+        className="text-yellow-400"
+      />
+      <span className="text-sm text-zinc-300">
+        Stars
+      </span>
+    </div>
+
+    <span className="font-semibold text-zinc-100">
+      {formatNumber(
+        analysis.repositories.reduce(
+          (sum, repo) => sum + (repo.stars ?? 0),
+          0
+        )
+      )}
+    </span>
+  </div>
+
+  <div className="flex items-center justify-between">
+    <div className="flex items-center gap-2">
+      <RepoForkedIcon
+        size={16}
+        className="text-zinc-400"
+      />
+      <span className="text-sm text-zinc-300">
+        Forks
+      </span>
+    </div>
+
+    <span className="font-semibold text-zinc-100">
+      {formatNumber(
+        analysis.repositories.reduce(
+          (sum, repo) => sum + (repo.forks ?? 0),
+          0
+        )
+      )}
+    </span>
+  </div>
+
+</div>
 
     <div className="mt-5">
 <div className="mb-3 flex items-center gap-2 text-zinc-400">
@@ -185,7 +206,14 @@ export default function DevPlusCard() {
     .map((language: string) => (
       <Badge
         key={language}
-        className="flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-100"
+        className="
+              rounded-full
+              border
+              border-zinc-700
+              bg-zinc-800
+              px-3
+              py-1
+              "
       >
         <span
           className="h-2.5 w-2.5 rounded-full"

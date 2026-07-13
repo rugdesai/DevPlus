@@ -1,5 +1,4 @@
 import {
-  Brain,
   CheckCircle2,
   TrendingUp,
   Target,
@@ -25,7 +24,6 @@ export default function AIInsights({
 
       <div className="flex items-center justify-between border-b border-zinc-700 pb-3">
         <div className="flex items-center gap-2">
-          <Brain className="h-5 w-5 text-violet-400" />
           <h3 className="font-semibold text-white">
             AI Insights
           </h3>

@@ -26,9 +26,9 @@ export default function RepoStarsChart({
     console.log("RepoStarsChart", data);
 
   return (
-    <div className="mt-6">
+    <div className="mt-6 rounded-xl border border-zinc-700 bg-zinc-900 p-4">
       <h3 className="mb-3 font-semibold">
-        ⭐ Top Starred Repositories
+         Top Starred Repositories
       </h3>
 
       <div style={{ width: 250, height: 250 }}>
@@ -49,7 +49,8 @@ export default function RepoStarsChart({
 
             <Bar
               dataKey="stars"
-              radius={[0, 6, 6, 0]}
+              radius={[6, 6, 0, 0]}
+              fill="#60A5FA"
             />
           </BarChart>
         </ResponsiveContainer>

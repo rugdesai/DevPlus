@@ -44,18 +44,17 @@ model Repository {
 model AIInsight {
   id String @id @default(uuid())
 
-
   score Int
 
   summary String?
 
   strengths String[]
 
-  weaknesses String[]
+  growthOpportunities String[]
 
+  nextMilestone String?
 
   createdAt DateTime @default(now())
-
 
   userId String @unique
 

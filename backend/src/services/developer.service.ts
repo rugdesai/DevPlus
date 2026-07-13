@@ -13,16 +13,13 @@ export async function analyzeDeveloper(username:string){
 
     // 1. check database first
 
-    const cached = await getCachedAnalysis(username);
+    // Cache disabled for AI testing
+// const cached = await getCachedAnalysis(username);
 
-
-    if(cached){
-
-        console.log("Returning cached analysis");
-
-        return cached;
-
-    }
+// if (cached) {
+//   console.log("Returning cached analysis");
+//   return cached;
+// }
 
 
 

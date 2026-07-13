@@ -215,10 +215,11 @@ export default function DevPlusCard() {
                     />
 
                     <AIInsights
-                        summary={analysis.insight.summary}
-                        strengths={analysis.insight.strengths}
-                        weaknesses={analysis.insight.weaknesses}
-                      />
+    summary={analysis.insight.summary}
+    strengths={analysis.insight.strengths}
+    growthOpportunities={analysis.insight.growthOpportunities}
+    nextMilestone={analysis.insight.nextMilestone}
+/>
                 </div>
             )}
             <div className="mt-6 border-t pt-3 text-center text-xs text-gray-500">

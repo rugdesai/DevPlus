@@ -1,83 +1,100 @@
 import prisma from "../config/db";
 
+export async function getCachedAnalysis(username: string) {
+  const cachedUser = await prisma.user.findUnique({
+    where: {
+      githubUsername: username,
+    },
+    include: {
+      repositories: true,
+      insight: true,
+    },
+  });
 
-export async function getCachedAnalysis(username:string){
-
-    const cachedUser = await prisma.user.findUnique({
-
-        where:{
-            githubUsername: username
-        },
-
-        include:{
-            repositories:true,
-            insight:true
-        }
-
-    });
-
-
-    return cachedUser;
-
+  return cachedUser;
 }
-
-
-
 
 export async function saveAnalysis(
-    username:string,
-    avatarUrl:string,
-    repos:any[],
-    score:number,
-    aiInsights:any
-){
+  username: string,
+  avatarUrl: string,
+  repos: any[],
+  score: number,
+  aiInsights: any
+) {
+  // Delete old repositories
+  await prisma.repository.deleteMany({
+    where: {
+      user: {
+        githubUsername: username,
+      },
+    },
+  });
 
+  // Delete old insight
+  await prisma.aIInsight.deleteMany({
+    where: {
+      user: {
+        githubUsername: username,
+      },
+    },
+  });
 
-return await prisma.user.create({
+  return await prisma.user.upsert({
+    where: {
+      githubUsername: username,
+    },
 
+    update: {
+      avatarUrl,
 
-data:{
+      repositories: {
+        create: repos.map((repo) => ({
+          name: repo.name,
+          language: repo.language,
+          stars: repo.stargazers_count,
+          forks: repo.forks_count,
+        })),
+      },
 
-githubUsername:username,
+      insight: {
+        create: {
+          score,
+          summary: aiInsights.summary,
+          strengths: aiInsights.strengths,
+          growthOpportunities: aiInsights.growthOpportunities,
+          nextMilestone: aiInsights.nextMilestone,
+        },
+      },
+    },
 
-avatarUrl:avatarUrl,
+    create: {
+      githubUsername: username,
 
+      avatarUrl,
 
-repositories:{
+      repositories: {
+        create: repos.map((repo) => ({
+          name: repo.name,
+          language: repo.language,
+          stars: repo.stargazers_count,
+          forks: repo.forks_count,
+        })),
+      },
 
-create: repos.map(repo => ({
+      insight: {
+        create: {
+          score,
+          summary: aiInsights.summary,
+          strengths: aiInsights.strengths,
+          growthOpportunities: aiInsights.growthOpportunities,
+          nextMilestone: aiInsights.nextMilestone,
+        },
+      },
+    },
 
-name: repo.name,
-
-language: repo.language,
-
-stars: repo.stargazers_count,
-
-forks: repo.forks_count
-
-}))
-
-},
-
-
-insight:{
-create: {
-    score: score,
-
-    summary: aiInsights.personality,
-
-    strengths: aiInsights.strengths,
-
-    weaknesses: aiInsights.weaknesses
-}
-
-}
-
-
-}
-
-
-});
-
-
+    include: {
+      repositories: true,
+      insight: true,
+    },
+  });
 }

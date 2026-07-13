@@ -38,7 +38,8 @@ export interface Insight {
     score: number;
     summary: string;
     strengths: string[];
-    weaknesses: string[];
+    growthOpportunities: string[];
+    nextMilestone: string;
     createdAt: string;
     userId: string;
 }

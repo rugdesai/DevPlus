@@ -202,6 +202,8 @@ export default function DevPlusCard() {
     </div>
 
 </div>
+
+                    
                     <LanguageChart
                         repositories={analysis.repositories}
                     />

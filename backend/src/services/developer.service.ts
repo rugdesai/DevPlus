@@ -1,105 +1,68 @@
 import { getGithubUser, getGithubRepos } from "./github.service";
-
 import { analyzeRepositories } from "./analytics.service";
-
 import { calculateDevScore } from "./scoring.service";
-
-import { getCachedAnalysis, saveAnalysis } from "./cache.service";
-
+import { saveAnalysis } from "./cache.service";
 import { generateDeveloperInsights } from "./ai.service";
 
-export async function analyzeDeveloper(username:string){
+export async function analyzeDeveloper(username: string) {
 
+  // Fetch GitHub data
+  console.log("Fetching fresh GitHub data");
 
-    // 1. check database first
+  const user = await getGithubUser(username);
+  const repos = await getGithubRepos(username);
 
-    // Cache disabled for AI testing
-// const cached = await getCachedAnalysis(username);
+  // Analyze repositories
+  const analytics = analyzeRepositories(repos);
 
-// if (cached) {
-//   console.log("Returning cached analysis");
-//   return cached;
-// }
+  // Calculate DevPlus score
+  const score = calculateDevScore(analytics);
 
+  let aiInsights;
 
-
-    // 2. If not cached, fetch GitHub
-
-    console.log("Fetching fresh GitHub data");
-
-
-    const user = await getGithubUser(username);
-
-
-    const repos = await getGithubRepos(username);
-
-
-
-
-    // 3. Analyze repos
-
-    const analytics = analyzeRepositories(repos);
-
-
-
-
-    // 4. Calculate DevPlus Score
-
-    const score = calculateDevScore(analytics);
-
-    let aiInsights;
-
-try {
-
- aiInsights =
- await generateDeveloperInsights(
-   analytics,
-   score
- );
-
-}
-catch(error){
-
- console.error("AI failed, using fallback");
-
- aiInsights = {
-  personality:"Developer",
-  strengths:[
-    "Consistent coding activity"
-  ],
-  weaknesses:[
-    "Need more data"
-  ],
-  suggestions:[
-    "Continue building projects"
-  ]
- };
-
-}
-    // 5. Save result
-
-    await saveAnalysis(
-        username,
-        user.avatar_url,
-        repos,
-        score,
-        aiInsights
+  try {
+    aiInsights = await generateDeveloperInsights(
+      analytics,
+      score
     );
+  } catch (error) {
+    console.error("AI failed, using fallback");
 
-
-
-
-    return {
-
-        username,
-
-        score,
-
-        analytics,
-
-        aiInsights
-
+    aiInsights = {
+      summary:
+        "This developer shows consistent GitHub activity with good potential for growth.",
+      strengths: [
+        "Consistent coding activity",
+        "Maintains active repositories",
+      ],
+      growthOpportunities: [
+        "Build more full-stack projects",
+        "Increase language diversity",
+      ],
+      nextMilestone:
+        "Publish a production-ready full-stack application.",
     };
+  }
 
+  // Save to database
+  await saveAnalysis(
+    username,
+    user.avatar_url,
+    repos,
+    score,
+    aiInsights
+  );
 
+  // Return data to frontend
+  return {
+    githubUsername: username,
+    repositories: repos,
+    insight: {
+      score,
+      summary: aiInsights.summary,
+      strengths: aiInsights.strengths,
+      growthOpportunities: aiInsights.growthOpportunities,
+      nextMilestone: aiInsights.nextMilestone,
+    },
+  };
 }

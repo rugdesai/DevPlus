@@ -222,6 +222,12 @@ export default function DevPlusCard() {
     </div>
 
 </div>
+<<<<<<< HEAD
+=======
+                    <LanguageChart
+                        repositories={analysis.repositories}
+                    />
+>>>>>>> 7b4acd2 (devplus chnages)
 
                     <RepoStarsChart
                         repositories={analysis.repositories}
@@ -232,11 +238,12 @@ export default function DevPlusCard() {
                     />
 
                     <AIInsights
-    summary={analysis.insight.summary}
-    strengths={analysis.insight.strengths}
-    growthOpportunities={analysis.insight.growthOpportunities}
+                        summary={analysis.insight.summary}
+                        strengths={analysis.insight.strengths}
+                         growthOpportunities={analysis.insight.growthOpportunities}
     nextMilestone={analysis.insight.nextMilestone}
-/>
+
+                      />
                 </div>
             )}
             <div className="mt-6 border-t pt-3 text-center text-xs text-gray-500">

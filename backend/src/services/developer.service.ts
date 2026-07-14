@@ -51,18 +51,21 @@ export async function analyzeDeveloper(username: string) {
     repos,
     score,
     aiInsights
-  );
+);
 
   // Return data to frontend
   return {
-    githubUsername: username,
-    repositories: repos,
-    insight: {
-      score,
-      summary: aiInsights.summary,
-      strengths: aiInsights.strengths,
-      growthOpportunities: aiInsights.growthOpportunities,
-      nextMilestone: aiInsights.nextMilestone,
-    },
-  };
+  githubUsername: username,
+  repositories: repos,
+
+  analytics,
+
+  insight: {
+    score,
+    summary: aiInsights.summary,
+    strengths: aiInsights.strengths,
+    growthOpportunities: aiInsights.growthOpportunities,
+    nextMilestone: aiInsights.nextMilestone,
+  },
+};
 }

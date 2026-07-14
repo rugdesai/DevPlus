@@ -45,14 +45,24 @@ export interface Insight {
 }
 
 export interface DeveloperAnalysis {
-    id: string;
     githubUsername: string;
-    avatarUrl: string;
-    createdAt: string;
 
     repositories: Repository[];
 
-    insight: Insight;
+    analytics: {
+        totalStars: number;
+        totalForks: number;
+        totalRepositories: number;
+        topLanguages: string[];
+    };
+
+    insight: {
+        score: number;
+        summary: string;
+        strengths: string[];
+        growthOpportunities: string[];
+        nextMilestone: string;
+    };
 }
 
 export function getUsername(): string | null {

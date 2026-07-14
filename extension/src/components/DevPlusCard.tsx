@@ -159,13 +159,8 @@ export default function DevPlusCard() {
     </div>
 
     <span className="font-semibold text-zinc-100">
-      {formatNumber(
-        analysis.repositories.reduce(
-          (sum, repo) => sum + (repo.stars ?? 0),
-          0
-        )
-      )}
-    </span>
+  {formatNumber(analysis.analytics.totalStars)}
+</span>
   </div>
 
   <div className="flex items-center justify-between">
@@ -180,13 +175,8 @@ export default function DevPlusCard() {
     </div>
 
     <span className="font-semibold text-zinc-100">
-      {formatNumber(
-        analysis.repositories.reduce(
-          (sum, repo) => sum + (repo.forks ?? 0),
-          0
-        )
-      )}
-    </span>
+  {formatNumber(analysis.analytics.totalForks)}
+</span>
   </div>
 
 </div>

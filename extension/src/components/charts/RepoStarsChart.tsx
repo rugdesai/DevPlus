@@ -25,32 +25,53 @@ export default function RepoStarsChart({
 
     console.log("RepoStarsChart", data);
 
-  return (
-    <div className="mt-6 rounded-xl border border-zinc-700 bg-zinc-900 p-4">
-      <h3 className="mb-3 font-semibold">
+return (
+    <div className="mt-6 rounded-xl border border-zinc-800 bg-[#0d1117] p-5">
+      <h3 className="mb-4 text-sm font-semibold text-zinc-100">
          Top Starred Repositories
       </h3>
 
-      <div style={{ width: 250, height: 250 }}>
-        <ResponsiveContainer width={250} height={250}>
+      {/* Bulletproof Responsive Wrapper */}
+      <div className="w-full relative" style={{ height: "250px" }}>
+        <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
             layout="vertical"
+            margin={{
+              top: 5,
+              right: 15,
+              left: 10, // Extra breathing room for the Y-Axis labels
+              bottom: 0,
+            }}
           >
-            <XAxis type="number" />
+            {/* XAxis handles the numbers (Stars) */}
+            <XAxis 
+              type="number" 
+              tick={{ fontSize: 10 }}
+              axisLine={false}
+              tickLine={false}
+            />
 
+            {/* YAxis handles the categories (Repo Names) */}
             <YAxis
               type="category"
-              dataKey="name"
-              width={90}
+              dataKey="shortName"
+              width={100} // Increased width so names don't get cut off
+              tick={{ fontSize: 10 }}
+              axisLine={false}
+              tickLine={false}
             />
 
             <Tooltip />
 
             <Bar
               dataKey="stars"
-              radius={[6, 6, 0, 0]}
+              name="Stars"
+              // [top-left, top-right, bottom-right, bottom-left]
+              // Rounds the right side of the horizontal bars
+              radius={[0, 4, 4, 0]} 
               fill="#60A5FA"
+              barSize={24} // Prevents horizontal bars from getting too thick
             />
           </BarChart>
         </ResponsiveContainer>

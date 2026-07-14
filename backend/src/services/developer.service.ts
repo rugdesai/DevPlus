@@ -26,7 +26,7 @@ export async function analyzeDeveloper(username: string) {
       score
     );
   } catch (error) {
-    console.error("AI failed, using fallback");
+    console.error("Gemini Error:", error);
 
     aiInsights = {
       summary:

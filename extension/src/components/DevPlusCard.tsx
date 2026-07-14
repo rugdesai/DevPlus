@@ -75,7 +75,7 @@ export default function DevPlusCard() {
         <Card>
             <div className="flex items-center justify-between">
                     <h2   className="text-2xl font-bold tracking-tight"
-                          style={{ color: "#eef65e" }}
+                          style={{ color: "#fbbf24" }}
                     >
                         DevPlus
                     </h2>
@@ -222,12 +222,6 @@ export default function DevPlusCard() {
     </div>
 
 </div>
-<<<<<<< HEAD
-=======
-                    <LanguageChart
-                        repositories={analysis.repositories}
-                    />
->>>>>>> 7b4acd2 (devplus chnages)
 
                     <RepoStarsChart
                         repositories={analysis.repositories}
@@ -238,12 +232,11 @@ export default function DevPlusCard() {
                     />
 
                     <AIInsights
-                        summary={analysis.insight.summary}
-                        strengths={analysis.insight.strengths}
-                         growthOpportunities={analysis.insight.growthOpportunities}
+    summary={analysis.insight.summary}
+    strengths={analysis.insight.strengths}
+    growthOpportunities={analysis.insight.growthOpportunities}
     nextMilestone={analysis.insight.nextMilestone}
-
-                      />
+/>
                 </div>
             )}
             <div className="mt-6 border-t pt-3 text-center text-xs text-gray-500">

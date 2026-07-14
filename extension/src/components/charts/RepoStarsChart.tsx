@@ -21,7 +21,11 @@ export default function RepoStarsChart({
 }: Props) {
   const data = [...repositories]
     .sort((a, b) => b.stars - a.stars)
-    .slice(0, 5);
+    .slice(0, 5)
+    .map(repo => ({
+      ...repo,
+      shortName: repo.name.length > 12 ? repo.name.slice(0, 12) + "..." : repo.name,
+    }));
 
     console.log("RepoStarsChart", data);
 

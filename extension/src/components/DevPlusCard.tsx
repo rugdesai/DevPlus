@@ -75,7 +75,7 @@ export default function DevPlusCard() {
         <Card>
             <div className="flex items-center justify-between">
                     <h2   className="text-2xl font-bold tracking-tight"
-                          style={{ color: "#fbbf24" }}
+                          style={{ color: "#eef65e" }}
                     >
                         DevPlus
                     </h2>

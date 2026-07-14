@@ -39,14 +39,14 @@ export default function RepositoryComparisonChart({
          Repository Popularity
       </h3>
 
-      <div style={{ width: 250, height: 250 }}>
-        <ResponsiveContainer width={250} height={250}>
+    <div className="w-full h-56 relative">
+        <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
             margin={{
               top: 10,
-              right: 20,
-              left: 10,
+              right: 10,
+              left: -20,
               bottom: 5,
             }}
           >
@@ -55,9 +55,24 @@ export default function RepositoryComparisonChart({
                 strokeOpacity={0.15} 
             />
 
-            <XAxis dataKey="shortName" />
+            <XAxis 
+                dataKey="shortName" 
+                axisLine={false} 
+                tickLine={false} 
+                dy={10}
+                tick={{
+                    fontSize: 10,
+                }}                
+            />
 
-            <YAxis />
+            <YAxis 
+                axisLine={false}
+                tickLine={false}
+                width={35}
+                tick={{
+                    fontSize: 10,
+                }}                
+            />
 
             <Tooltip />
 

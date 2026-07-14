@@ -36,7 +36,6 @@ import { useGithubProfile } from "../hooks/useGithubProfile";
 import { getDeveloperAnalysis } from "../services/api";
 import type { DeveloperAnalysis } from "../utils/github";
 import AIInsights from "./AIInsights";
-import LanguageChart from "./charts/LanguageChart";
 import RepoStarsChart from "./charts/RepoStarsChart";
 import RepositoryComparisonChart from "./charts/RepositoryComparisonChart";
 
@@ -200,20 +199,13 @@ export default function DevPlusCard() {
   </span>
 </div>
 
-<div className="mt-3 flex flex-wrap gap-2">
+<div className="mt-3 space-y-2">
   {[...new Set(analysis.repositories.map(repo => repo.language))]
     .filter(Boolean)
     .map((language: string) => (
-      <Badge
+      <div
         key={language}
-        className="
-              rounded-full
-              border
-              border-zinc-700
-              bg-zinc-800
-              px-3
-              py-1
-              "
+        className="flex items-center gap-3 text-sm text-zinc-300"
       >
         <span
           className="h-2.5 w-2.5 rounded-full"
@@ -224,17 +216,12 @@ export default function DevPlusCard() {
         />
 
         <span>{language}</span>
-      </Badge>
+      </div>
     ))}
 </div>
     </div>
 
 </div>
-
-                    
-                    <LanguageChart
-                        repositories={analysis.repositories}
-                    />
 
                     <RepoStarsChart
                         repositories={analysis.repositories}

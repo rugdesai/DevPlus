@@ -4,7 +4,7 @@ import {
   Target,
 } from "lucide-react";
 
-import Badge from "./Badge";
+
 
 interface Props {
   summary: string;
@@ -24,12 +24,13 @@ export default function AIInsights({
 
       <div className="flex items-center justify-between border-b border-zinc-700 pb-3">
         <div className="flex items-center gap-2">
-          <h3 className="font-semibold text-white">
+          <h3 className="font-semibold font-sans text-white">
             AI Insights
           </h3>
+            <span className="text-sm font-medium text-zinc-300">
+                Developer
+            </span>
         </div>
-
-        <Badge>Developer</Badge>
       </div>
 
       <div>
@@ -42,43 +43,37 @@ export default function AIInsights({
         </p>
       </div>
 
-      <div>
+      <div className="rounded-md border border-zinc-700 bg-transparent p-4 flex flex-col gap-3">
         <h4 className="mb-3 flex items-center gap-2 font-semibold text-green-400">
           <CheckCircle2 className="h-4 w-4" />
           Strengths
         </h4>
 
-        <div className="space-y-2">
-          {strengths.map((item: string) => (
-            <div
-              key={item}
-              className="rounded-lg bg-green-900/20 border border-green-700/30 px-3 py-2 text-sm text-gray-300"
-            >
-              {item}
-            </div>
-          ))}
-        </div>
+<ul className="flex flex-col gap-2 list-disc pl-5 marker:text-zinc-500">
+  {strengths.map((item: string) => (
+    <li key={item} className="text-sm font-medium text-zinc-200">
+      {item}
+    </li>
+  ))}
+</ul>
       </div>
 
-      <div>
+      <div className="rounded-md border border-zinc-700 bg-transparent p-4 flex flex-col gap-3">
         <h4 className="mb-3 flex items-center gap-2 font-semibold text-yellow-400">
           <TrendingUp className="h-4 w-4" />
           Growth Opportunities
         </h4>
 
-        <div className="space-y-2">
-          {growthOpportunities.map((item: string) => (
-            <div
-              key={item}
-              className="rounded-lg bg-yellow-900/20 border border-yellow-700/30 px-3 py-2 text-sm text-gray-300"
-            >
-              {item}
-            </div>
-          ))}
-        </div>
+<ul className="flex flex-col gap-2 list-disc pl-5 marker:text-zinc-500">
+  {growthOpportunities.map((item: string) => (
+    <li key={item} className="text-sm font-medium text-zinc-200">
+      {item}
+    </li>
+  ))}
+</ul>
       </div>
 
-      <div className="rounded-lg border border-violet-700/30 bg-violet-900/20 p-4">
+      <div className="rounded-md border border-zinc-700 bg-transparent p-4 flex flex-col gap-3">
         <h4 className="mb-2 flex items-center gap-2 font-semibold text-violet-300">
           <Target className="h-4 w-4" />
           Next Milestone

@@ -11,8 +11,10 @@ import {
 
 interface Repository {
   name: string;
-  stars: number;
-  forks: number;
+  stars?: number;              
+  forks?: number;              
+  stargazers_count?: number;   
+  forks_count?: number;        
 }
 
 interface Props {
@@ -23,14 +25,14 @@ export default function RepositoryComparisonChart({
   repositories,
 }: Props) {
   // 1. BULLETPROOF DATA PREPARATION
-  const data = [...repositories]
-    .sort((a, b) => (Number(b.stars) || 0) - (Number(a.stars) || 0))
+const data = [...repositories]
+    // Sort using the raw GitHub property
+    .sort((a, b) => (Number(b.stargazers_count) || 0) - (Number(a.stargazers_count) || 0))
     .slice(0, 5)
     .map(repo => ({
       ...repo,
-      // Force it to be a valid number, fallback to 0 if it's broken or undefined
-      stars: Number(repo.stars) || 0, 
-      forks: Number(repo.forks) || 0,
+      stars: Number(repo.stargazers_count) || 0, 
+      forks: Number(repo.forks) || Number(repo.forks_count) || 0,
       shortName: repo.name.length > 10 ? repo.name.slice(0, 10) + "..." : repo.name,
     }));
 

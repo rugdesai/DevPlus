@@ -36,7 +36,6 @@ import { useGithubProfile } from "../hooks/useGithubProfile";
 import { getDeveloperAnalysis } from "../services/api";
 import type { DeveloperAnalysis } from "../utils/github";
 import AIInsights from "./AIInsights";
-import RepoStarsChart from "./charts/RepoStarsChart";
 import RepositoryComparisonChart from "./charts/RepositoryComparisonChart";
 
 export default function DevPlusCard() {
@@ -212,11 +211,6 @@ export default function DevPlusCard() {
     </div>
 
 </div>
-
-                    <RepoStarsChart
-                        repositories={analysis.repositories}
-                    />
-
                     <RepositoryComparisonChart
                         repositories={analysis.repositories}
                     />

@@ -1,0 +1,26 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.analyzeRepositories = void 0;
+const analyzeRepositories = (repos) => {
+    let totalStars = 0;
+    let totalForks = 0;
+    const languages = {};
+    repos.forEach((repo) => {
+        totalStars += repo.stargazers_count;
+        totalForks += repo.forks_count;
+        if (repo.language) {
+            languages[repo.language] =
+                (languages[repo.language] || 0) + 1;
+        }
+    });
+    const topLanguages = Object.entries(languages)
+        .sort((a, b) => b[1] - a[1])
+        .map(([language]) => language);
+    return {
+        totalStars,
+        totalForks,
+        topLanguages,
+        totalRepositories: repos.length
+    };
+};
+exports.analyzeRepositories = analyzeRepositories;

@@ -17,13 +17,13 @@ DevPlus analyzes public GitHub profiles to generate repository analytics, a cust
 ### Analytics Dashboard
 
 <p align="center">
-  <img src="./assets/dashboard.png" alt="DevPlus Dashboard" width="900">
+  <img src="extension/src/assets/dashboard.png" alt="DevPlus Dashboard" width="900">
 </p>
 
 ### AI Developer Insights
 
 <p align="center">
-  <img src="./assets/ai-insights.png" alt="DevPlus AI Insights" width="900">
+  <img src="extension/src/assets/ai-insights.png" alt="DevPlus AI Insights" width="900">
 </p>
 
 ## Live API
@@ -140,7 +140,3 @@ DevPlus/
 - Repository trend tracking
 - Team comparison dashboard
 - Historical developer insights
-
-## License
-
-MIT License.

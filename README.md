@@ -1,47 +1,68 @@
 # DevPlus
 
-> AI-powered GitHub Developer Analytics Chrome Extension
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma)
 
----
 
-**DevPlus** is an AI-powered GitHub analytics platform that transforms GitHub activity into meaningful developer insights. Using repository data and AI, it generates a custom developer score, highlights strengths, and suggests areas for improvement—all directly from a Chrome Extension.
+AI-powered GitHub Developer Analytics Chrome Extension.
 
-Think of it as **Spotify Wrapped + Grammarly** for GitHub Developers!
+DevPlus analyzes public GitHub profiles to generate repository analytics, a custom developer score, and AI-powered insights. It combines GitHub repository data with Google Gemini to provide an overview of a developer's activity, strengths, and areas for improvement directly within GitHub.
 
----
+## Preview
 
-## ✨ Features
+### Analytics Dashboard
+
+<p align="center">
+  <img src="./assets/dashboard.png" alt="DevPlus Dashboard" width="900">
+</p>
+
+### AI Developer Insights
+
+<p align="center">
+  <img src="./assets/ai-insights.png" alt="DevPlus AI Insights" width="900">
+</p>
+
+## Live API
+
+**Backend:** https://devplus-backend-85gu.onrender.com
+
+## Features
 
 - Analyze any public GitHub profile
-- Custom Developer Score
+- Custom developer scoring algorithm
 - Repository analytics (stars, forks, languages, repositories)
 - AI-generated developer insights
-- Intelligent caching using PostgreSQL
+- PostgreSQL caching for improved performance
 - Chrome Extension integration
+- Dockerized backend deployment
 
----
-
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Backend
+
 - Node.js
 - Express.js
 - TypeScript
 - PostgreSQL
 - Prisma ORM
-
-### AI & APIs
-- GitHub REST API
-- Google Gemini API
+- Docker
 
 ### Frontend
+
 - React
 - TypeScript
 - Chrome Extension (Manifest V3)
 
----
+### APIs & AI
 
-## 🏗 How it Works
+- GitHub REST API
+- Google Gemini API
+
+## System Architecture
 
 ```text
 GitHub Profile
@@ -53,35 +74,19 @@ Chrome Extension
 Express Backend
       │
       ▼
-GitHub API
+GitHub REST API
       │
       ▼
-Analytics + Developer Score
+Analytics Engine
       │
       ▼
-Gemini AI
+Google Gemini
       │
       ▼
-Response displayed inside the extension
+Developer Insights
 ```
 
----
-
-## 🚀 Getting Started
-
-```bash
-git clone <repo-url>
-
-cd backend
-
-npm install
-
-npm run dev
-```
-
----
-
-## 📡 API
+## API
 
 ### Analyze a GitHub User
 
@@ -91,41 +96,51 @@ GET /api/analyze/:username
 
 Example
 
-```
+```http
 GET /api/analyze/octocat
 ```
 
----
+## Local Setup
 
-## 📂 Project Structure
+```bash
+git clone https://github.com/rugdesai/DevPlus.git
 
-```
-backend/
-├── controllers
-├── services
-├── routes
-├── config
-├── prisma
-└── server.ts
+cd DevPlus/backend
 
-extension/
+npm install
+npm run dev
 ```
 
----
+## Project Structure
 
-## 👥 Contributors
+```text
+DevPlus/
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── prisma/
+│   ├── routes/
+│   ├── services/
+│   └── server.ts
+│
+└── extension/
+```
 
-- **Rugveda Desai** — Backend Development, Database, Analytics Engine, AI Integration
-- **Gautam Misra** — Chrome Extension, React Frontend, UI/UX
+## Contributors
 
----
+| Name | Responsibilities |
+|------|------------------|
+| **Rugveda Desai** | Backend Architecture, REST API Development, GitHub API Integration, Analytics Engine, Developer Scoring Algorithm, PostgreSQL Database Design, Prisma ORM, AI Integration (Google Gemini), Dockerization, Backend Deployment |
+| **Gautam Misra** | Chrome Extension Development (Manifest V3), React Frontend Development, TypeScript Integration, GitHub Content Script Injection, Extension UI/UX Design, Data Visualization & Charts |
 
-## 🚧 Roadmap
+## Future Improvements
 
-- GitHub contribution insights
+- Contribution analytics
 - Pull request analytics
-- Developer trend tracking
-- Team comparisons
-- Deployment
+- Repository trend tracking
+- Team comparison dashboard
+- Historical developer insights
 
-If you found this project interesting, consider giving it a ⭐ on GitHub!
+## License
+
+MIT License.

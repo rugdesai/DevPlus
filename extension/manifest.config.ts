@@ -11,10 +11,10 @@ export default defineManifest({
   permissions: ["storage"],
 
   host_permissions: [
-    "https://github.com/*",
-    "https://api.github.com/*",
-    "http://localhost:5050/*",
-  ],
+  "https://github.com/*",
+  "https://api.github.com/*",
+  "https://devplus-backend-85gu.onrender.com/*",
+],
 
   action: {
     default_title: "DevPlus",
